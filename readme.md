@@ -49,3 +49,11 @@ export default function Navbar(){
 - 버튼을 누르면 다음 form으로 넘어가는 레이아웃을 만들고 있다.
 - 버튼을 누를때마다 db에 전송하는 방법 말고 한번에 전송하는 방법을 고안 중
 - 버튼을 누를때 화면만 바뀌는 방법을 고안 중 
+
+# 2022-09-11
+
+1. onClick, useState사용
+- useState를 사용하여 modal창 띄우기
+
+2. props 사용
+- props 사용하여 useState 초기화 
