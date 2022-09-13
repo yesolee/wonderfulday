@@ -173,3 +173,15 @@ npm install axios
       console.log('listening on 8001');
     });
 ```
+
+# 2022-09-13
+
+1. map 사용시 html 코드 주의점
+-map(()=>{
+    여기에 바로 html 코드를 넣으면 안되고
+    return (
+        꼭 여기에 넣어야함 !!!
+    )
+})
+
+** 해당 문제 때문인데 proxy 문제인 줄 알고 삽질을 계속 했다..
