@@ -195,3 +195,41 @@ npm install axios
 2. ajax, params 이용하여 db에서 불러오기
 - null 이 나온다 왜그럴까...
 
+# 2022-09-15
+
+1. find, findOne ({ _id: 요청.params.id })
+- _id 를 찾을 경우 null 이 나왔다
+- 다른 property를 입력하면 정상 출력된다
+- server.js에 ObejctId를 import 후 { _id: new ObjectId(요청.params.id) }로 형식을 맞춰주니 성공하였다.
+
+2. D-day 계산
+1) server.js에서 db에 생성시 new Date를 사용하여 Date 형식의 날짜를 db 입력할 수 있다. 
+- 대신 axios로 react에 들어올땐 string으로 오기 때문에 new Date()로 바꿔줘야 한다.
+- 2022-09-15 포맷으로 가져오고 싶을 경우  
+```js
+new Date(props.roomsummary.시작일)
+                .toISOString()
+                .substring(0, 10) //앞에서 10자리 가져오기
+```
+
+2) string으로 날짜 입력하는 경우
+```js
+function dDay(enddate) {
+  const now = new Date();
+  const today =
+    now.getFullYear() +
+    '-' +
+    (now.getMonth() + 1 > 9 ? now.getMonth() + 1 : '0' + (now.getMonth() + 1)) +
+    '-' +
+    (now.getDate() > 9 ? now.getDate() : '0' + now.getDate());
+  const startDate = new Date(`${today}T00:00:00+0900`); // T00:00:00+0900 한국시간
+  const endDate = new Date(`${enddate}T00:00:00+0900`);
+  const timeGap = endDate.getTime() - startDate.getTime();
+  const dday = Math.floor(timeGap / (1000 * 60 * 60 * 24)); // ms * 초 * 분 * 시간 = 하루
+  return dday;
+```
+
+3) new Date()
+- new Date().getMonth() : 0부터 시작하므로 +1을 해준다
+- getDate() : 날짜
+- getDay() : 요일을 숫자로 나타낸 것, 일요일은 0 월요일은 1 
