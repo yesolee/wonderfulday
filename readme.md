@@ -248,3 +248,25 @@ function dDay(enddate) {
 
 # 2022-09-22
 - html에서 글자 띄어쓰기는 &nbsp;
+
+# 2022-09-29
+1. sass 도입
+2. state로 collapse 기능 만들기
+- console.log()를 해보면 값이 바뀌었는데, 화면에는 바뀌지가 않는다..
+=> 바뀌지 않은게 아니라 반영이 안된것, 다른 페이지 들어갔다 오면 바뀌어져 있음
+*** state가 array라서 copy를 잘못해서 그런것!
+*** state변경 함수는 state 값이 기존값과 동일하면 변경되지 않는다.
+```js
+  let [show, setShow] = useState([false, false]);
+  
+<tr
+onClick={() => {
+  let copy = [...show]; 
+//array, object는 reference data type => copy해서 쓰자!
+// 이거를 let copy = show;라고해서 array값이 아니라 array의 참조값이 복사된것!
+  copy[0] = !copy[0];
+  setShow(copy);
+}}
+>
+  
+```
