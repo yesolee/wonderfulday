@@ -270,3 +270,26 @@ onClick={() => {
 >
   
 ```
+
+# 2022-09-30
+- 레이아웃 디자인 구상이 오래걸려서 이러다 마크업만 하다 지칠 것 같아 잠시 마이페이지는 멈추고 로그인 기능을 만들어야겠다.
+
+- export default
+1) 코딩앙마
+```js
+- export default function 작명() {
+    return ();
+}
+```
+
+2) 코딩애플
+```js
+function 작명() {
+    return ();
+}
+export default 작명
+```
+
+3) export vs export default
+- export 내보낼수있는게 여러개인 경우
+- export default 1개만 있는경우
