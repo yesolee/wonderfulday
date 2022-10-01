@@ -362,3 +362,8 @@ npm i --save @fortawesome/free-regular-svg-icons
 // 실제 사용시 카멜케이스로 변경 및 {} 이용!!
 <FontAwesomeIcon icon={fa-user} />
 ```
+5) form태그
+- form 태그 중 button submit 사용시 버튼에 onClick시 axios요청 구문을 따로 쓰지 않아도 됨.
+- 서버에 post 요청 시 구문 작성만 하면 됨.
+
+6) -passport의 flash message  찾아보기
