@@ -287,9 +287,78 @@ onClick={() => {
 function 작명() {
     return ();
 }
-export default 작명
+export default 작명;
 ```
 
 3) export vs export default
 - export 내보낼수있는게 여러개인 경우
 - export default 1개만 있는경우
+
+# 2022-10-01
+
+1. 개념
+- 회원인증방법 3가지
+1) 세션 베이스드 어쎈디케이션(session-based)
+- 어떤 사람이 로그인 함 → 서버는 메모리에 저장하고 쿠키(브라우저에 몰래 저장할수 있는 긴 문자열(세션아이디))를 발행함 → 로그인 후 사용자가 마이페이지 보여달라고 요청(쿠키데이터 전송, 자동으로 몰래 보내짐) → 서버는 로그인했는지 판단(세션데이터에서 아이디를 갖고 찾음) → 마이페이지를 유저에게 보내줌
+- 자바스크립트 라이브러리 들이 알아서 해줌, 흐름만 이해
+
+- 서버메모리에 로그인 상태를 저장
+
+2) token-based(JWT)
+- 로그인 시 서버에 전송 → 서버는 JSON웹 토큰(암호와된 긴 문자열)을 발행해줌 → 브라우저는 쿠키나 로컬스토리지 같은데 저장함 → 유저가 마이페이지 보여달라고 요청(웹토큰을 헤더에 포함시켜 전송) → 서버는 웹토큰이 유효기간 안지났는지 검증 후 마이페이지 보내줌
+
+- 서버에 로그인 상태를 저장할 필요가 없음, 웹토큰(유통기한 있는 열쇠) 유효한지 아닌지 판단 => REST 원칙(stateless해야한다)
+
+3) Open Authentication(OAuth)
+- 구글의 프로필 정보를 가져옴
+
+- 로그인 시 구글계정정보를 저쪽에 제공하는걸 동의? → 이메일, 이름, 성별 등 정보를 서버에 전달 → 서버에서 계정만들거나 세션만들거나 JWT발급하거나 등등..
+
+- 서버는 비밀번호를 다룰 일이 없으나,,, 사이트가 없어지면 사용할수없음 ㅎ
+
+
+2. 실습
+- 로그인 기능 구현 관련 라이브러리 설치 후 import
+- npm install passport passport-local express-session 3개설치
+(로그인, 로그인 검증, 세션생성)
+```js
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
+const session = require('express-session');
+
+app.use(session({secret : '비밀코드', resave : true, saveUninitialized: false}));
+app.use(passport.initialize());
+app.use(passport.session()); 
+```
+
+** 미들웨어 (app.use(어쩌구)) : 모든 요청과 응답 중간에 어쩌구가 실행됨.
+
+serializeUser() 
+- 유저의 id 데이터를 바탕으로 세션데이터를 만들어주고
+- 그 세션데이터의 아이디를 쿠키로 만들어서 사용자의 브라우저로 보내줍니다. 
+
+- react 에서 fontawesome 사용하기
+1) SVG 코어 추가
+ 모든 유틸리티가 포함 된 핵심 패키지를 설치
+https://fontawesome.com/v6/docs/web/use-with/react/
+- npm i --save @fortawesome/fontawesome-svg-core
+
+2) 아이콘 패키지 추가
+- # Free icons styles
+npm i --save @fortawesome/free-solid-svg-icons
+npm i --save @fortawesome/free-regular-svg-icons
+
+3) React 컴포넌트 추가
+- npm i --save @fortawesome/react-fontawesome@latest
+
+4) import 
+- import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+- import { faUser } from '@fortawesome/free-solid-svg-icons';
+** 주의 !!
+```
+// fontawesome 홈페이지에 react 버전
+<FontAwesomeIcon icon="fa-solid fa-user" />
+
+// 실제 사용시 카멜케이스로 변경 및 {} 이용!!
+<FontAwesomeIcon icon={fa-user} />
+```
