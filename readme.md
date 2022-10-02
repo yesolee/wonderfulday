@@ -367,3 +367,10 @@ npm i --save @fortawesome/free-regular-svg-icons
 - 서버에 post 요청 시 구문 작성만 하면 됨.
 
 6) -passport의 flash message  찾아보기
+
+# 2022-10-02
+- React 에서 form 태그르 쓰지 않는 이유: 새로고침 되기 때문 !! 잊지말자.
+- ajax 요청으로 대체 : name태그를 사용하는게 아니라 onChange 시 e.target.value를 변수나 스테이트에 담아서 전송!
+
+- JSX내에서는 if문 불가능. 삼항연산자는 가능!&&도 가능!
+- Id, 닉네임을 db에서 중복된 값이 있는지 확인하고 state를 이용해 경고문 보여주기
