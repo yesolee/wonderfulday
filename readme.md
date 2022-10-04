@@ -381,3 +381,22 @@ npm i --save @fortawesome/free-regular-svg-icons
 - javascript 정규식이라는 것을 찾았다.
 
 ## 1. 정규표현식
+```js
+    const regex = /[^a-zA-Z0-9]/g; // 영문자제외 [^제외할문자] / g는 글로벌
+    regex.test(user.id) // user.id는 onChange((e)=>{e.target.value})로 들어온 문자열 //제외시킨 특수문자 있으면 true
+```
+
+# 2022-10-04
+
+- id, 닉네임, pw의 state를 한 state 변수에 담으니 헷갈려서 object 형으로 변경하였다.
+- object 복사 시 { ... } 스프레드 문법 이용 // 깊은복사
+
+- 문제1 : e.target.value의 값이 1타자씩 늦게 인식됨
+-> 해결: useEffect((),[state])적용
+useEffect()를 적용 해 user의 state가 들어온 뒤 글자수를 세었다. (그 전에는 1타자 늦게 입력되었다.)
+
+- 문제2 :  처음 페이지 로드 시에는 경고문구 없으나, 커서 입력 후 또는 값 입력후에 값이 없으면 경고창을 띄우고싶다.
+-> 난관: input 값의 길이가 0 일때도 경고문구가 나오게 만들어서, 초기 상태에도 경고창이 나왔다. 
+-> 해결: 또 다른 state를 만들어 input태그에 포커스가 해지될때와(onBlur()) onChange시에 경고문구가 나오게 수정하였다.
+문제를 해결하니 더 재미있다.
+-> 계획: DOM 이벤트(마우스, 포커스 등등) 찾아보기
