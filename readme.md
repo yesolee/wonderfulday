@@ -425,3 +425,41 @@ useEffect()를 적용 해 user의 state가 들어온 뒤 글자수를 세었다.
 
 - server에서 redirect 시 페이지 이동이 안됨.
 - react에서 useNavigate 사용.
+
+# 2022-10-27
+- 로그인시 세션정보를 state에 담아 로그인시에만 navbar에 마이페이지/로그아웃 버튼을 보여주고 싶었다.
+- 모든 페이지에서 user가 확인될 수 있도록 redux를 활용하고자 함.
+
+** redux 왜쓰는가?
+- 모든 컴포넌트들이 store에 있는 state를 사용할 수 있음(공유)
+- props안써도됨
+
+
+1. redux 설치
+- react와 react-dom이 18버전 이상일 것
+- npm install @reduxjs/toolkit react-redux 으로 설치
+- store.js파일 생성
+```js
+import { configureStore } from '@reduxjs/toolkit'
+
+export default configureStore({
+  reducer: { }
+}) 
+```
+
+-index.js수정
+```js
+import { Provider } from "react-redux";
+import store from './store.js'
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <React.StrictMode>
+    <Provider store={store}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </Provider>
+  </React.StrictMode>
+); 
+```
